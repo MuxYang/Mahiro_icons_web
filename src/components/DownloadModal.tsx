@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { IconData } from '../types'
-import { SIZES, FORMATS_WITH_SIZES, FORMATS_SINGLE } from '../types'
+import { ICO_SIZES, IMG_SIZES, FORMATS_SINGLE } from '../types'
 import { useMirror } from '../contexts/MirrorContext'
 import { triggerDownload } from '../utils/download'
 import './DownloadModal.css'
@@ -37,6 +37,12 @@ export function DownloadModal({ icon, onClose }: DownloadModalProps) {
         }
     }, [rawBase, icon.folderName])
 
+    const FORMAT_GROUPS: { format: string; sizes: readonly number[] }[] = [
+        { format: 'ico', sizes: ICO_SIZES },
+        { format: 'jpg', sizes: IMG_SIZES },
+        { format: 'png', sizes: IMG_SIZES },
+    ]
+
     return (
         <div className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label={`Download ${icon.displayName}`}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -51,11 +57,11 @@ export function DownloadModal({ icon, onClose }: DownloadModalProps) {
                 </div>
 
                 <div className="modal-body">
-                    {FORMATS_WITH_SIZES.map(format => (
+                    {FORMAT_GROUPS.map(({ format, sizes }) => (
                         <div key={format} className="format-group">
                             <div className="format-group__label">{format.toUpperCase()}</div>
                             <div className="format-group__sizes">
-                                {SIZES.map(size => {
+                                {sizes.map(size => {
                                     const key = `${format}-${size}`
                                     return (
                                         <button

@@ -12,6 +12,6 @@ export interface DownloadOption {
     size?: number
 }
 
-export const SIZES = [64, 128, 256, 512, 1024] as const
-export const FORMATS_WITH_SIZES = ['ico', 'jpg', 'png'] as const
+export const ICO_SIZES = [16, 32, 64, 128, 256] as const
+export const IMG_SIZES = [64, 128, 256, 512, 1024] as const
 export const FORMATS_SINGLE = ['svg', 'xml'] as const
