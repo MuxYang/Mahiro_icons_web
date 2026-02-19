@@ -1,0 +1,15 @@
+name: Rebuild on Icons Update
+on:
+  repository_dispatch:
+    types: [icons-updated]
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trigger ESA rebuild via empty commit
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git commit --allow-empty -m "chore: rebuild for icon updates"
+          git push
