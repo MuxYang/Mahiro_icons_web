@@ -1,10 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { ThemeProvider } from './contexts/ThemeContext'
+import { MirrorProvider } from './contexts/MirrorContext'
 import './index.css'
-import App from './App.tsx'
+import App from './App'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <ThemeProvider>
+      <MirrorProvider>
+        <App />
+      </MirrorProvider>
+    </ThemeProvider>
   </StrictMode>,
 )
